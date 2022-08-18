@@ -1,0 +1,91 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  S3_storage
+
+  Sample SAM Template for S3_storage
+  
+Globals:
+  Function:
+    Timeout: 3
+    Tracing: Active
+  Api:
+    TracingEnabled: True
+Parameters:
+  UserTable:
+    Description: "User Table"
+    Type: "String"
+    Default: "user_details"
+  BucketName:
+    Description: "S3 Bucket"
+    Type: "String"
+    Default: "MyBucketForUserStorage"
+
+Resources:
+
+  UserStorageBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: bucketforuser01
+
+  UserLoginFunction:
+    Type: AWS::Serverless::Function 
+    Properties:
+      FunctionName: User-Login-Function
+      CodeUri: userlogin/
+      Handler: index1.handler
+      Runtime: nodejs16.x
+      Architectures:
+        - x86_64
+      Environment:
+        Variables:
+          UserTable: !Ref UserTable
+          
+      Events: 
+        UserLoginAPI:
+          Type: HttpApi 
+          Properties:
+            Path: /UserLoginFunction
+            Method: any
+
+  UserStorageFunction:
+    Type: AWS::Serverless::Function 
+    Properties:
+      FunctionName: User-Storage-Function
+      CodeUri: userstorage/
+      Handler: index2.handler
+      Runtime: nodejs16.x
+      Architectures:
+        - x86_64
+      Environment:
+        Variables:
+          UserTable: !Ref UserTable
+          BucketName: !Ref BucketName
+      Events:
+        ListObjects:
+          Type: HttpApi 
+          Properties:
+            Path: /UserStorageFunction
+            Method: get
+        UploadObjects:
+          Type: HttpApi 
+          Properties:
+            Path: /UserStorageFunction
+            Method: post
+
+  UserDetailsTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: !Ref UserTable
+      AttributeDefinitions: 
+        - AttributeName: email_id 
+          AttributeType: S
+      KeySchema: 
+        - AttributeName: email_id
+          KeyType: HASH
+      ProvisionedThroughput: 
+        ReadCapacityUnits: 5
+        WriteCapacityUnits: 5
+      
+  
+
