@@ -33,6 +33,8 @@ Resources:
     Properties:
       FunctionName: User-Login-Function
       CodeUri: userlogin/
+      Policies:
+      - AmazonDynamoDBFullAccess
       Handler: index1.handler
       Runtime: nodejs16.x
       Architectures:
@@ -53,6 +55,8 @@ Resources:
     Properties:
       FunctionName: User-Storage-Function
       CodeUri: userstorage/
+      Policies:
+      - AmazonDynamoDBFullAccess
       Handler: index2.handler
       Runtime: nodejs16.x
       Architectures:

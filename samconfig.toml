@@ -2,11 +2,12 @@ version = 0.1
 [default]
 [default.deploy]
 [default.deploy.parameters]
-stack_name = "test01"
-s3_bucket = "userstoragebucket"
-s3_prefix = "test01"
+stack_name = "stack01"
+s3_bucket = "bucketforuserstorage"
+s3_prefix = "stack01"
 region = "us-east-1"
 confirm_changeset = true
 capabilities = "CAPABILITY_IAM"
 disable_rollback = true
 image_repositories = []
+parameter_overrides = "UserTable=\"user_details\" BucketName=\"MyBucketForUserStorage\""

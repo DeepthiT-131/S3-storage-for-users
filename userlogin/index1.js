@@ -23,14 +23,14 @@ const createAccount=async(event)=>{
             statusCode:400,  
             body:JSON.stringify({
                 "message":false, 
-                "data":err
+                "data": " Enter your Name and EmailId "
             })
         }
     }
 }
 
 const params1 = {
-    TableName : "user_details"
+    TableName : process.env.UserTable
 }
 let res1 = await dynamodb.scan(params1).promise()
 console.log(res1.Count)     
@@ -55,7 +55,6 @@ else {
     }
 }
  
-
 }
     
     
