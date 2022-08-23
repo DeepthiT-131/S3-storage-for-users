@@ -19,14 +19,14 @@ Parameters:
   BucketName:
     Description: "S3 Bucket"
     Type: "String"
-    Default: "MyBucketForUserStorage"
+    Default: "userstoragebucket001"
 
 Resources:
 
   UserStorageBucket:
     Type: AWS::S3::Bucket
     Properties:
-      BucketName: bucketforuser01
+      BucketName: !Ref BucketName
 
   UserLoginFunction:
     Type: AWS::Serverless::Function 
