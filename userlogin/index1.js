@@ -23,7 +23,7 @@ const createAccount=async(event)=>{
             statusCode:400,  
             body:JSON.stringify({
                 "message":false, 
-                "data": " Enter your Name and EmailId "
+                "data": " Enter your Name and EmailId  "
             })
         }
     }

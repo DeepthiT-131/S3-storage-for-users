@@ -5,9 +5,9 @@ version = 0.1
 stack_name = "stack01"
 s3_bucket = "bucketforuserstorage"
 s3_prefix = "stack01"
-region = "us-east-1"
+region = "us-east1"
 confirm_changeset = true
 capabilities = "CAPABILITY_IAM"
 disable_rollback = true
 image_repositories = []
-parameter_overrides = "UserTable=\"user_details\" BucketName=\"MyBucketForUserStorage\""
+parameter_overrides = "UserTable=\"user_details\" BucketName=\"userstoragebucket001\""
