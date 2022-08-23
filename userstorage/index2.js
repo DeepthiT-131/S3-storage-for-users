@@ -45,7 +45,7 @@ exports.handler = async (event) => {
         statusCode : 400,
         body:JSON.stringify({
             "message": false,
-            "data":err
+            "data": "Please check if email_id is registered or the key parameter is provided "
         })
     };
     }
